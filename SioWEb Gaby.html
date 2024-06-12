@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ropa y Novedades Bella's</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0;
+        }
+        header { 
+            background-color: #f1f1f1; 
+            padding: 10px 20px; 
+            text-align: center; 
+            border-bottom: 3px solid #333366; 
+        }
+        header img {
+            width: 150px; /* Adjust this value based on your actual logo size */
+        }
+        main { padding: 20px; }
+        section { margin-bottom: 20px; }
+        .address { font-style: italic; }
+        .objectives, .hours { font-size: small; }
+        h1, h2 { color: #333366; }
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 5px 0; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px 0; display: flex; align-items: center; }
+        .product img { width: 100px; height: 100px; object-fit: cover; margin-right: 10px; }
+        .product h3 { margin: 0; }
+        .product p { margin: 5px 0; }
+        .product button { margin-left: auto; }
+        footer { 
+            background-color: #f1f1f1; 
+            padding: 10px 20px; 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+        .cart-button {
+            background-color: #333366; 
+            color: white; 
+            padding: 10px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            margin-top: 20px; 
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed; 
+            z-index: 1; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let cart = [];
+
+        function addToCart(product) {
+            const existingProduct = cart.find(item => item.name === product.name);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                product.quantity = 1;
+                cart.push(product);
+            }
+            alert(product.name + " ha sido añadido al carrito.");
+        }
+
+        function viewCart() {
+            let cartContent = cart.map(item => `${item.name} - $${item.price} x ${item.quantity}`).join("\\n");
+            let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            cartContent += `\\n\\nTotal: $${total.toFixed(2)}`;
+
+            document.getElementById('cart-content').innerText = "Carrito de Compras:\\n" + cartContent;
+            document.getElementById('cart-modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('cart-modal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('cart-modal')) {
+                document.getElementById('cart-modal').style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="images/LOGO.png" alt="Logo de Ropa y Novedades Bella's">
+        <h1>Ropa y Novedades Bella’s</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introducción</h2>
+            <p>En Ropa y Novedades Bella’s nos dedicamos a la venta de ropa, accesorios y calzado para toda la familia. Somos una empresa comercial de carácter privado y nacional, contando con 50 empleados y una estructura departamentalizada.</p>
+        </section>
+
+        <section>
+            <h2>Objetivos del Sitio</h2>
+            <ul class="objectives">
+                <li>Aumentar las ventas</li>
+                <li>Mejorar la calidad de los productos</li>
+                <li>Expandirse a nuevos mercados</li>
+                <li>Mejorar la imagen de marca</li>
+                <li>Aumentar la fidelidad de los clientes</li>
+                <li>Expandirse internacionalmente</li>
+                <li>Innovar en diseños y materiales</li>
+                <li>Optimizar la gestión de inventario</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Horario de Atención</h2>
+            <p class="hours">Lunes, Martes, Jueves, Viernes y Sábado: de 11:00 AM a 8:00 PM<br>Miércoles: de 11:00 AM a 6:00 PM<br>Domingo: CERRADO</p>
+        </section>
+
+        <section>
+            <h2>Mapa y Ubicación</h2>
+            <p>Visita el siguiente enlace para ver la ubicación en Bing Maps:</p>
+            <a href="https://www.bing.com/maps?osid=d073636f-ec37-419b-957e-4032d77f953b&cp=25.988665~-98.116044&lvl=16.82&pi=0&v=2&sV=2&form=S00027" target="_blank">Ver Ubicación en Bing Maps</a>
+        </section>
+
+        <section>
+            <h2>Tarjeta de Presentación</h2>
+            <img src="images/tarjeta_presentacion.png" alt="Tarjeta de Presentación de Ropa y Novedades Bella's">
+        </section>
+
+       
+         <section>
+    <h2>Productos</h2>
+    <div class="product">
+        <img src="images/producto1.jpg" alt="KOTENKO - Camisa de lino de manga corta para hombre">
+        <div>
+            <h3>KOTENKO - Camisa de lino de manga corta para hombre</h3>
+            <p>Precio: $25.00</p>
+        </div>
+        <button onclick='addToCart({name: "KOTENKO - Camisa de lino de manga corta para hombre", price: 25.00})'>Agregar al Carrito</button>
+    </div>
+    <div class="product">
+        <img src="images/producto2.jpg" alt="GOTOTOP - Vestido de verano para mujer">
+        <div>
+            <h3>GOTOTOP - Vestido de verano para mujer</h3>
+            <p>Precio: $30.00</p>
+        </div>
+        <button onclick='addToCart({name: "GOTOTOP - Vestido de verano para mujer", price: 30.00})'>Agregar al Carrito</button>
+    </div>
+    <div class="product">
+        <img src="images/producto3.jpg" alt="VIOPY Camisas De Hombre">
+        <div>
+            <h3>VIOPY Camisas De Hombre</h3>
+            <p>Precio: $15.00</p>
+        </div>
+        <button onclick='addToCart({name: "VIOPY Camisas De Hombre", price: 15.00})'>Agregar al Carrito</button>
+    </div>
+    <div class="product">
+        <img src="images/producto4.jpg" alt="Amazon Essentials - Pantalones cortos de corte clásico para hombre">
+        <div>
+            <h3>Amazon Essentials - Pantalones cortos de corte clásico para hombre</h3>
+            <p>Precio: $50.00</p>
+        </div>
+        <button onclick='addToCart({name: "Amazon Essentials - Pantalones cortos de corte clásico para hombre", price: 50.00})'>Agregar al Carrito</button>
+    </div>
+    <div class="product">
+        <img src="images/producto5.jpg" alt="Buttergene - Conjunto de entrenamiento para mujer">
+        <div>
+            <h3>Buttergene - Conjunto de entrenamiento para mujer</h3>
+            <p>Precio: $40.00</p>
+        </div>
+        <button onclick='addToCart({name: "Buttergene - Conjunto de entrenamiento para mujer", price: 40.00})'>Agregar al Carrito</button>
+    </div>
+    <button class="cart-button" onclick="viewCart()">Ver Carrito</button>
+</section>
+
+    </main>
+
+    <footer>
+        <p>Contacto: info@ropaynovedadesbellas.com</p>
+    </footer>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <pre id="cart-content"></pre>
+        </div>
+    </div>
+</body>
+</html>
